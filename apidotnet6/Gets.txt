@@ -1,0 +1,23 @@
+﻿OUTROS GET's POSSÍVEIS
+
+app.MapGet("/", () => "Hello World!");
+
+app.MapGet("/user", () => new { Name = "Marcelo", Age = "22", Ocupation = "System Analyst" });
+
+app.MapGet("AddHeader", (HttpResponse response) =>
+{
+    response.Headers.Add("Teste", "Jovem");
+    return new { Name = "Marcelo", Age = "22", Ocupation = "System Analyst" };
+});
+
+// Obter produto por query params
+app.MapGet("/products", ([FromQuery] string dateStart, [FromQuery] string dateEnd) =>
+{
+    return dateStart + " - " + dateEnd;
+});
+
+// Obter produto pelo header
+app.MapGet("/productbyheader", (HttpRequest request) =>
+{
+    return request.Headers["product-code"].ToString();
+});
